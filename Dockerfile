@@ -15,6 +15,7 @@ ENV TAG=$tag
 
 RUN apt-get update
 RUN apt-get install -qq -y \
+  libfontconfig \
   sqlite \
   wget \
   tar
