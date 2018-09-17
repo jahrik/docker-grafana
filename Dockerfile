@@ -1,7 +1,7 @@
 FROM arm32v7/ubuntu
 
 ENV ARCH=arm32v7
-ENV GRAFANA_VERSION=$grafana_version
+ENV GRAFANA_VERSION=5.2.4
 ENV GRAFANA_ARCH=armhf
 ENV TAG=$tag
 
@@ -19,7 +19,7 @@ RUN apt-get install -qq -y \
   wget \
   tar
 RUN wget https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb -O /tmp/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb
-RUN apt install -y /tmp/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb
+RUN dpkg -i /tmp/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb
 RUN rm /tmp/grafana_${GRAFANA_VERSION}_${GRAFANA_ARCH}.deb
 
 ADD config.ini /grafana/conf/config.ini
