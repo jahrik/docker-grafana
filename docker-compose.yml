@@ -18,7 +18,7 @@ services:
       # - GF_SMTP_USER=${GF_SMTP_USER}
       # - GF_SMTP_PASSWORD=${GF_SMTP_PASSWORD}
     volumes:
-      - /mnt/g2/grafana:/data:rw
+      - /mnt/g1/grafana:/data:rw
     deploy:
       mode: replicated
       replicas: 1
