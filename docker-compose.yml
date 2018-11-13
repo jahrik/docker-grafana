@@ -30,6 +30,9 @@ services:
         traefik.port: 3000
         traefik.frontend.rule: Host:grafana.homelab.business
         traefik.frontend.entryPoints: http
+      placement:
+        constraints:
+          - node.labels.arch == aarch64
 
 networks:
   traefik:
