@@ -4,6 +4,8 @@ services:
 
   grafana:
     image: jahrik/arm-grafana:arm32v7
+    networks:
+      - traefik
     ports:
       - 3000:3000
     environment:
@@ -24,3 +26,8 @@ services:
       replicas: 1
       labels:
         traefik.docker.network: traefik
+
+networks:
+  traefik:
+    driver: overlay
+    external: true
