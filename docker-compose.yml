@@ -26,6 +26,7 @@ services:
       replicas: 1
       labels:
         traefik.docker.network: traefik
+        traefik.frontend.rule: Host:grafana.homelab.business
 
 networks:
   traefik:
