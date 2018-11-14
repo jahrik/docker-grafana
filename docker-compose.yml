@@ -25,11 +25,11 @@ services:
       mode: replicated
       replicas: 1
       labels:
-        traefik.docker.network: traefik
+        traefik.enable: 1
         traefik.backend: grafana
+        traefik.docker.network: traefik
         traefik.port: 3000
         traefik.frontend.rule: Host:grafana.homelab.business
-        traefik.frontend.entryPoints: http
       placement:
         constraints:
           - node.labels.arch == aarch64
