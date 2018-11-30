@@ -8,6 +8,8 @@ services:
       # - traefik
     ports:
       - 3000:3000
+    networks:
+      - monitor
     environment:
       - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
       - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
@@ -34,7 +36,7 @@ services:
         constraints:
           - node.labels.arch == aarch64
 
-# networks:
-#   traefik:
-#     driver: overlay
-#     external: true
+networks:
+  monitor:
+    driver: overlay
+    external: true
