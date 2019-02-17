@@ -1,40 +1,43 @@
-version: '3'
+version: '3.7'
 
 services:
 
   grafana:
-    image: jahrik/arm-grafana:arm32v7
-    # networks:
-      # - traefik
+    image: jahrik/arm-grafana:armv7l
+    networks:
+      - traefik
+      - monitor
     ports:
       - 3000:3000
     networks:
       - monitor
     environment:
-      - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
-      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
-      - GF_USERS_ALLOW_SIGN_UP=false
-      # - GF_SERVER_ROOT_URL=${GF_SERVER_ROOT_URL:-localhost}
-      # - GF_SMTP_ENABLED=${GF_SMTP_ENABLED:-false}
-      # - GF_SMTP_FROM_ADDRESS=${GF_SMTP_FROM_ADDRESS:-grafana@test.com}
-      # - GF_SMTP_FROM_NAME=${GF_SMTP_FROM_NAME:-Grafana}
-      # - GF_SMTP_HOST=${GF_SMTP_HOST:-smtp:25}
-      # - GF_SMTP_USER=${GF_SMTP_USER}
-      # - GF_SMTP_PASSWORD=${GF_SMTP_PASSWORD}
+      GF_SECURITY_ADMIN_USER: "${ADMIN_USER:-admin}"
+      GF_SECURITY_ADMIN_PASSWORD: "${ADMIN_PASSWORD:-admin}"
+      GF_USERS_ALLOW_SIGN_UP: false
+      GF_SMTP_ENABLED: "${GF_SMTP_ENABLED:-false}"
+      GF_SMTP_FROM_ADDRESS: "${GF_SMTP_FROM_ADDRESS:-grafana@test.com}"
+      GF_SMTP_FROM_NAME: "${GF_SMTP_FROM_NAME:-Grafana}"
+      GF_SMTP_HOST: "${GF_SMTP_HOST:-smtp:25}"
+      GF_SMTP_USER: "${GF_SMTP_USER}"
+      GF_SMTP_PASSWORD: "${GF_SMTP_PASSWORD}"
+      GF_DATABASE_HOST: "${GF_DATABASE_HOST:-mysql}"
+      GF_DATABASE_USER: "${GF_DATABASE_USER:-grafana}"
+      GF_DATABASE_PASSWORD: "${GF_DATABASE_PASSWORD:-password}"
     volumes:
       - /mnt/g1/grafana:/data:rw
     deploy:
       mode: replicated
       replicas: 1
       labels:
-        traefik.enable: 0
+        traefik.enable: 1
         traefik.backend: grafana
         traefik.docker.network: traefik
         traefik.port: 3000
         traefik.frontend.rule: Host:grafana.homelab.business
       placement:
         constraints:
-          - node.labels.arch == aarch64
+          - node.labels.arch == armv7l
 
 networks:
   monitor:
