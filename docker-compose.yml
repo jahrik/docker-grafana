@@ -25,8 +25,8 @@ services:
       GF_DATABASE_HOST: "${GF_DATABASE_HOST:-mysql}"
       GF_DATABASE_USER: "${GF_DATABASE_USER:-grafana}"
       GF_DATABASE_PASSWORD: "${GF_DATABASE_PASSWORD:-password}"
-    volumes:
-      - /mnt/g1/grafana:/data:rw
+    # volumes:
+      # - /mnt/g1/grafana:/data:rw
     deploy:
       mode: replicated
       replicas: 1
