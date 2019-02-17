@@ -5,14 +5,6 @@ ENV GRAFANA_VERSION=5.2.4
 ENV GRAFANA_ARCH=armhf
 ENV TAG=$tag
 
-# ENV GF_SECURITY_ADMIN_PASSWORD=admin
-# ENV GF_SECURITY_ADMIN_USER=admin \
-# ENV GF_PATHS_PROVISIONING=/etc/grafana/provisioning/
-
-# COPY datasources /etc/grafana/provisioning/datasources/
-# COPY swarmprom_dashboards.yml /etc/grafana/provisioning/dashboards/
-# COPY dashboards /etc/grafana/dashboards/
-
 RUN apt-get update
 RUN apt-get install -qq -y \
   libfontconfig \
