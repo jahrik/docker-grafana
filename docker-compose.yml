@@ -30,15 +30,18 @@ services:
       replicas: 1
       labels:
         traefik.enable: 1
+        traefik.port: 3000
         traefik.backend: grafana
         traefik.docker.network: traefik
-        traefik.port: 3000
-        traefik.frontend.rule: Host:grafana.homelab.business
-      placement:
-        constraints:
-          - node.labels.arch == arm32v7
-
+        traefik.frontend.rule: Host:homelab.business
+        traefik.frontend.entryPoints: https
+ 
 networks:
   monitor:
+    name: monitor
+    driver: overlay
+    external: true
+  traefik:
+    name: traefik
     driver: overlay
     external: true
