@@ -36,7 +36,7 @@ node('manager') {
       withCredentials([
         usernamePassword(credentialsId: 'gf-db-creds',
           usernameVariable: 'GF_DATABASE_USER',
-          passwordVariable: 'GF_DATABASE_PASS'),
+          passwordVariable: 'GF_DATABASE_PASSWORD'),
         usernamePassword(credentialsId: 'gf-smtp-creds',
           usernameVariable: 'GF_SMTP_USER',
           passwordVariable: 'GF_SMTP_PASSWORD'),
