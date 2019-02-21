@@ -2,7 +2,7 @@
 
 env.GF_SMTP_ENABLED = true
 
-node('armv7l') {
+node('aarch64') {
 
   try {
 
