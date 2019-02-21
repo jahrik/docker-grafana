@@ -42,6 +42,8 @@ node('manager') {
           passwordVariable: 'GF_SMTP_PASSWORD'),
         string(credentialsId: 'gf-smtp-host',
           variable: 'GF_SMTP_HOST'),
+        string(credentialsId: 'gf-smtp-from-address',
+          variable: 'GF_SMTP_FROM_ADDRESS'),
         string(credentialsId: 'gf-db-host',
           variable: 'GF_DATABASE_HOST')]) {
         sh "make deploy"
