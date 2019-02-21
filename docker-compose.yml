@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   grafana:
-    image: jahrik/arm-grafana:armv7l
+    image: jahrik/arm-grafana:aarch64
     networks:
       - traefik
       - monitor
