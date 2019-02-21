@@ -7,8 +7,6 @@ services:
     networks:
       - traefik
       - monitor
-    ports:
-      - 3000:3000
     environment:
       GF_SECURITY_ADMIN_USER: "${ADMIN_USER:-admin}"
       GF_SECURITY_ADMIN_PASSWORD: "${ADMIN_PASSWORD:-admin}"

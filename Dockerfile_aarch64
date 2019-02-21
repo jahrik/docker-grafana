@@ -1,0 +1,27 @@
+FROM arm64v8/ubuntu
+
+ENV ARCH=arm64
+ENV VERSION=6.0.0
+
+RUN apt-get update
+RUN apt-get install -qq -y \
+  libfontconfig \
+  sqlite \
+  wget \
+  tar
+RUN wget https://dl.grafana.com/oss/release/grafana_${VERSION}-beta3_${ARCH}.deb -O /tmp/grafana_${VERSION}-beta3_${ARCH}.deb
+RUN dpkg -i /tmp/grafana_${VERSION}-beta3_${ARCH}.deb
+RUN rm /tmp/grafana_${VERSION}-beta3_${ARCH}.deb
+
+ADD config.ini /grafana/conf/config.ini
+
+RUN        mkdir /data && chown -R grafana /data
+
+USER       grafana
+EXPOSE     3000
+VOLUME     [ "/data" ]
+WORKDIR    /usr/share/grafana/
+
+ENTRYPOINT [ "/usr/sbin/grafana-server" ]
+
+CMD        [ "-config=/grafana/conf/config.ini" ]

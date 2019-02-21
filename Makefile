@@ -5,7 +5,7 @@ STACK = "monitor"
 all: build
 
 build:
-	@docker build -t ${IMAGE}:$(TAG) .
+	@docker build -t ${IMAGE}:$(TAG) -f Dockerfile_${TAG} .
 
 push:
 	@docker push ${IMAGE}:$(TAG)
