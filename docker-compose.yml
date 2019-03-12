@@ -21,7 +21,6 @@ services:
       GF_DATABASE_HOST: "${GF_DATABASE_HOST}"
       GF_DATABASE_USER: "${GF_DATABASE_USER}"
       GF_DATABASE_PASSWORD: "${GF_DATABASE_PASSWORD}"
-      GF_INSTALL_PLUGINS: "grafana-piechart-panel,grafana-worldmap-panel"
     deploy:
       mode: replicated
       replicas: 1

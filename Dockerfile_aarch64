@@ -2,6 +2,7 @@ FROM arm64v8/ubuntu
 
 ENV ARCH=arm64
 ENV VERSION=6.0.0
+ENV GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel
 
 RUN apt-get update
 RUN apt-get install -qq -y \
