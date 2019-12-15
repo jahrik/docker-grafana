@@ -1,7 +1,7 @@
 FROM arm64v8/ubuntu
 
 ENV ARCH=arm64
-ENV VERSION=6.0.0
+ENV VERSION=6.5.2
 ENV GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel
 
 RUN apt-get update
@@ -10,9 +10,9 @@ RUN apt-get install -qq -y \
   sqlite \
   wget \
   tar
-RUN wget https://dl.grafana.com/oss/release/grafana_${VERSION}-beta3_${ARCH}.deb -O /tmp/grafana_${VERSION}-beta3_${ARCH}.deb
-RUN dpkg -i /tmp/grafana_${VERSION}-beta3_${ARCH}.deb
-RUN rm /tmp/grafana_${VERSION}-beta3_${ARCH}.deb
+RUN wget https://dl.grafana.com/oss/release/grafana_${VERSION}_${ARCH}.deb -O /tmp/grafana_${VERSION}_${ARCH}.deb
+RUN dpkg -i /tmp/grafana_${VERSION}_${ARCH}.deb
+RUN rm /tmp/grafana_${VERSION}_${ARCH}.deb
 
 ADD config.ini /grafana/conf/config.ini
 
