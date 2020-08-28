@@ -27,12 +27,12 @@ services:
       labels:
         - traefik.enable=true
         - traefik.network=traefik
-        - traefik.http.routers.traefik.tls=true
-        - traefik.http.routers.traefik.service=grafana
-        - traefik.http.routers.traefik.rule=Host(`grafana.homelab.business`)
-        - traefik.http.routers.traefik.middlewares=grafana-auth
-        - traefik.http.routers.traefik.entrypoints=web,websecure
-        - traefik.http.services.traefik.loadbalancer.server.port=3000
+        - traefik.http.routers.grafana.tls=true
+        - traefik.http.routers.grafana.service=grafana
+        - traefik.http.routers.grafana.rule=Host(`grafana.homelab.business`)
+        - traefik.http.routers.grafana.middlewares=grafana-auth
+        - traefik.http.routers.grafana.entrypoints=web,websecure
+        - traefik.http.services.grafana.loadbalancer.server.port=3000
         - traefik.http.middlewares.grafana-auth.basicauth.usersfile=/etc/traefik/.htpasswd
 
 networks:
