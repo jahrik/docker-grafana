@@ -30,10 +30,10 @@ services:
         - traefik.http.routers.traefik.tls=true
         - traefik.http.routers.traefik.service=grafana
         - traefik.http.routers.traefik.rule=Host(`grafana.homelab.business`)
-        - traefik.http.routers.traefik.middlewares=traefik-auth
+        - traefik.http.routers.traefik.middlewares=grafana-auth
         - traefik.http.routers.traefik.entrypoints=web,websecure
         - traefik.http.services.traefik.loadbalancer.server.port=3000
-        - traefik.http.middlewares.traefik-auth.basicauth.usersfile=/etc/traefik/.htpasswd
+        - traefik.http.middlewares.grafana-auth.basicauth.usersfile=/etc/traefik/.htpasswd
 
 networks:
   monitor:
