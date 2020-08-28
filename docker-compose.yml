@@ -25,12 +25,16 @@ services:
       mode: replicated
       replicas: 1
       labels:
-        traefik.enable: 1
-        traefik.http.services.grafana.loadbalancer.server.port: 3000
-        traefik.backend: grafana
-        traefik.docker.network: traefik
-        traefik.frontend.rule: Host:grafana.homelab.business
- 
+        - traefik.enable=true
+        - traefik.network=traefik
+        - traefik.http.routers.traefik.tls=true
+        - traefik.http.routers.traefik.service=grafana
+        - traefik.http.routers.traefik.rule=Host(`grafana.homelab.business`)
+        - traefik.http.routers.traefik.middlewares=traefik-auth
+        - traefik.http.routers.traefik.entrypoints=web,websecure
+        - traefik.http.services.traefik.loadbalancer.server.port=3000
+        - traefik.http.middlewares.traefik-auth.basicauth.usersfile=/etc/traefik/.htpasswd
+
 networks:
   monitor:
     name: monitor
