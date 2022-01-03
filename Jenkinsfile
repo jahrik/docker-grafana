@@ -2,7 +2,7 @@
 
 env.GF_SMTP_ENABLED = true
 
-node('aarch64') {
+node('x86_64') {
 
   try {
 
