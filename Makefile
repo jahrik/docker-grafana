@@ -1,6 +1,10 @@
 .EXPORT_ALL_VARIABLES:
-IMAGE = "jahrik/grafana"
-ARCH:=$(shell uname -m)
+IMAGE:="jahrik/grafana"
+ifeq ($(shell uname -m),aarch64)
+	ARCH:=arm64
+else
+	ARCH:=$(shell uname -m)
+endif
 TAG:=${ARCH}-focal
 STACK = "monitor"
 
