@@ -24,7 +24,7 @@ node('x86_64') {
   }
 }
 
-node('manager') {
+node('x86_64') {
 
   try {
     stage('scm') {
