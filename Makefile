@@ -5,6 +5,7 @@ ifeq ($(shell uname -m),aarch64)
 else
 	ARCH:=$(shell uname -m)
 endif
+# focal is Ubuntu 20.04
 TAG:=${ARCH}-focal
 STACK = "monitor"
 

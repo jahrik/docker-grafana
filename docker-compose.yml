@@ -3,9 +3,9 @@ version: '3.7'
 services:
 
   grafana:
-    image: jahrik/arm-grafana:aarch64
+    image: "jahrik/grafana:${TAG}"
     networks:
-      - traefik
+      # - traefik
       - monitor
     environment:
       GF_SECURITY_ADMIN_USER: "${ADMIN_USER:-admin}"
@@ -24,23 +24,23 @@ services:
     deploy:
       mode: replicated
       replicas: 1
-      labels:
-        - traefik.enable=true
-        - traefik.network=traefik
-        - traefik.http.routers.grafana.tls=true
-        - traefik.http.routers.grafana.service=grafana
-        - traefik.http.routers.grafana.rule=Host(`grafana.homelab.business`)
-        - traefik.http.routers.grafana.middlewares=grafana-auth
-        - traefik.http.routers.grafana.entrypoints=web,websecure
-        - traefik.http.services.grafana.loadbalancer.server.port=3000
-        - traefik.http.middlewares.grafana-auth.basicauth.usersfile=/etc/traefik/.htpasswd
+#       labels:
+#         - traefik.enable=true
+#         - traefik.network=traefik
+#         - traefik.http.routers.grafana.tls=true
+#         - traefik.http.routers.grafana.service=grafana
+#         - traefik.http.routers.grafana.rule=Host(`grafana.homelab.business`)
+#         - traefik.http.routers.grafana.middlewares=grafana-auth
+#         - traefik.http.routers.grafana.entrypoints=web,websecure
+#         - traefik.http.services.grafana.loadbalancer.server.port=3000
+#         - traefik.http.middlewares.grafana-auth.basicauth.usersfile=/etc/traefik/.htpasswd
 
 networks:
   monitor:
     name: monitor
     driver: overlay
     external: true
-  traefik:
-    name: traefik
-    driver: overlay
-    external: true
+#   traefik:
+#     name: traefik
+#     driver: overlay
+#     external: true
