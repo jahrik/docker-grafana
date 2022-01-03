@@ -1,7 +1,7 @@
 ARG TAG=
+ARG ARCH=
 FROM multiarch/ubuntu-core:${TAG}
 
-ENV ARCH=$TAG
 ENV VERSION=6.5.2
 ENV GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel
 

@@ -1,12 +1,16 @@
 .EXPORT_ALL_VARIABLES:
 IMAGE = "jahrik/grafana"
-TAG:=$(shell uname -m)-focal
+ARCH:=$(shell uname -m)
+TAG:=${ARCH}-focal
 STACK = "monitor"
 
 all: build
 
 build:
-	@docker build -t ${IMAGE}:$(TAG) --build-arg TAG=${TAG} .
+	@docker build \
+		-t ${IMAGE}:$(TAG) \
+		--build-arg ARCH=${ARCH} \
+		--build-arg TAG=${TAG} .
 
 push:
 	@docker push ${IMAGE}:$(TAG)
