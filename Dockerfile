@@ -1,6 +1,7 @@
-FROM arm64v8/ubuntu
+ARG TAG=
+FROM multiarch/ubuntu-core:${TAG}
 
-ENV ARCH=arm64
+ENV ARCH=$TAG
 ENV VERSION=6.5.2
 ENV GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel
 

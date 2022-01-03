@@ -1,11 +1,12 @@
-IMAGE = "jahrik/arm-grafana"
-TAG:=$(shell uname -m)
+.EXPORT_ALL_VARIABLES:
+IMAGE = "jahrik/grafana"
+TAG:=$(shell uname -m)-focal
 STACK = "monitor"
 
 all: build
 
 build:
-	@docker build -t ${IMAGE}:$(TAG) -f Dockerfile_${TAG} .
+	@docker build -t ${IMAGE}:$(TAG) --build-arg TAG=${TAG} .
 
 push:
 	@docker push ${IMAGE}:$(TAG)
