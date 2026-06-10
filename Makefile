@@ -1,21 +1,12 @@
 .EXPORT_ALL_VARIABLES:
-IMAGE:="jahrik/grafana"
-ifeq ($(shell uname -m),aarch64)
-	ARCH:=arm64
-else
-	ARCH:=$(shell uname -m)
-endif
-# focal is Ubuntu 20.04
-TAG:=${ARCH}-focal
+IMAGE = "jahrik/grafana"
+TAG = latest
 STACK = "monitor"
 
 all: build
 
 build:
-	@docker build \
-		-t ${IMAGE}:$(TAG) \
-		--build-arg ARCH=${ARCH} \
-		--build-arg TAG=${TAG} .
+	@docker build -t ${IMAGE}:$(TAG) .
 
 push:
 	@docker push ${IMAGE}:$(TAG)
