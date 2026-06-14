@@ -1,23 +1,29 @@
-ARG TAG=
-ARG ARCH=
-FROM multiarch/ubuntu-core:${TAG}
+FROM ubuntu:24.04
+LABEL org.opencontainers.image.authors="jahrik@gmail.com"
 
-ENV VERSION=6.5.2
+# Set automatically by buildx (amd64/arm64); default for plain docker build
+ARG TARGETARCH=amd64
+
+ENV VERSION=13.0.2
 ENV GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel
 
-RUN apt-get update
-RUN apt-get install -qq -y \
-  libfontconfig \
-  sqlite \
+# hadolint ignore=DL3008
+RUN apt-get update \
+  && apt-get install -qq -y --no-install-recommends \
+  adduser \
+  ca-certificates \
+  libfontconfig1 \
   wget \
-  tar
-RUN wget https://dl.grafana.com/oss/release/grafana_${VERSION}_${ARCH}.deb -O /tmp/grafana_${VERSION}_${ARCH}.deb
-RUN dpkg -i /tmp/grafana_${VERSION}_${ARCH}.deb
-RUN rm /tmp/grafana_${VERSION}_${ARCH}.deb
+  && wget -q "https://dl.grafana.com/oss/release/grafana_${VERSION}_${TARGETARCH}.deb" -O /tmp/grafana.deb \
+  && dpkg -i /tmp/grafana.deb \
+  && rm /tmp/grafana.deb \
+  && apt-get purge -y wget \
+  && apt-get autoremove -y \
+  && rm -rf /var/lib/apt/lists/*
 
-ADD config.ini /grafana/conf/config.ini
+COPY config.ini /grafana/conf/config.ini
 
-RUN        mkdir /data && chown -R grafana /data
+RUN mkdir /data && chown -R grafana /data
 
 USER       grafana
 EXPOSE     3000
