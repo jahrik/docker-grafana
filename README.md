@@ -11,7 +11,7 @@ docker pull jahrik/grafana
 ## Build
 
 ```bash
-make build
+just build
 ```
 
 Or directly:
@@ -42,7 +42,7 @@ docker run -d -p 3000:3000 \
 `docker-compose.yml` defines a replicated service on the external `monitor` overlay network, configured through `GF_*` env vars (database, SMTP, admin credentials):
 
 ```bash
-make deploy
+just deploy
 ```
 
 ## CI
