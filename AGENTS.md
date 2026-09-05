@@ -9,9 +9,9 @@ Produces `jahrik/grafana` — a multi-arch (amd64/arm64) Grafana OSS image for h
 ## Build & Push
 
 ```bash
-make build   # build locally as jahrik/grafana:latest
-make push    # push to Docker Hub
-make deploy  # docker stack deploy -c docker-compose.yml monitor
+just build   # build locally as jahrik/grafana:latest
+just push    # push to Docker Hub
+just deploy  # docker stack deploy -c docker-compose.yml monitor
 ```
 
 ## CI
